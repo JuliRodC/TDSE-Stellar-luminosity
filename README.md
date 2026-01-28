@@ -102,7 +102,7 @@ No se utilizan bibliotecas de aprendizaje automático de alto nivel como:
 
 ## Evidencia de Ejecución en AWS SageMaker
 
-
+![image-example](Images/image.png)
 
 ### Procedimiento de Carga
 
@@ -170,4 +170,4 @@ Los modelos desarrollados reflejan aspectos fundamentales de la física estelar:
 ## Autor
 Maria Juliana Rodriguez Caicedo
 Escuela Colombiana De Ingenieria Julio Garavito
-Proyecto desarrollado como parte del Bootcamp de Aprendizaje Automático en el contexto de Transformación Digital y Arquitectura Empresarial.
+
