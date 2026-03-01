@@ -1,0 +1,260 @@
+================================================================================
+AUTOMATIC COPILOT EVALUATION
+Course: Digital Transformation and Enterprise Architecture
+Assignment: Stellar Luminosity – Linear and Polynomial Regression from First Principles
+Repository: JuliRodC/TDSE-Stellar-luminosity
+Evaluated: 2026-03-01
+================================================================================
+
+────────────────────────────────────────────────────────────────────────────────
+SUMMARY
+────────────────────────────────────────────────────────────────────────────────
+This is a solid, well-structured submission that addresses virtually all mandatory
+and recommended assignment elements. Both notebooks are cleanly organized, follow
+a logical progression, and demonstrate genuine understanding of the underlying
+mathematics. Linear regression (Part 1) is thorough and nearly flawless. The
+polynomial regression notebook (Part 2) covers all required experiments—feature
+engineering, model comparison, interaction-coefficient sweep, and inference—but
+contains one execution-breaking bug in a non-essential print statement at the end
+of the interaction-cost analysis cell (truncated variable name
+`cost_without_interacti`). The README is informative and detailed, though the
+embedded screenshot link (`Images/image.png`) is broken because that file does
+not exist; the actual SageMaker screenshots (Screen.png through Screen5.png) are
+present in the Images/ folder but not properly referenced in the document.
+Overall the submission reflects strong technical competence and clear conceptual
+understanding of both the machine-learning methods and their astrophysical context.
+
+────────────────────────────────────────────────────────────────────────────────
+GRADING BREAKDOWN (0.0 – 5.0 scale)
+────────────────────────────────────────────────────────────────────────────────
+
+1. Repository Structure & Compliance                        Score: 0.45 / 0.50
+   ─────────────────────────────────────────────────────────────────────────────
+   ✔ README.md is present and comprehensive.
+   ✔ Two notebooks cover Part I (linear) and Part II (polynomial) respectively.
+   ✔ All datasets are defined directly inside the notebooks as NumPy arrays.
+   ✔ Only permitted libraries are used: numpy, matplotlib (mpl_toolkits is part
+     of matplotlib). No scikit-learn, statsmodels, TensorFlow, or similar.
+   ✘ Minor deduction: README references `Images/image.png` which does not exist
+     in the repository; the Screenshots subsection is left empty. Six actual
+     screenshots (Screen.png, Screen1–5.png) are present in Images/ but are not
+     embedded in the README.
+   Deduction: –0.05
+
+2. Notebook 1 – Linear Regression                          Score: 1.90 / 2.00
+   ─────────────────────────────────────────────────────────────────────────────
+   ✔ Dataset visualization with scatter plot and linearity analysis commentary.
+   ✔ Hypothesis function and MSE implemented correctly from scratch.
+   ✔ Cost surface: 3D surface and contour plots generated on a parameter grid,
+     with interpretation (convexity, elliptic contours, gradient direction).
+   ✔ Gradient derivation shown in markdown (∂J/∂w, ∂J/∂b) and implemented in
+     both non-vectorized loop form and vectorized NumPy form; numerical
+     equivalence verified.
+   ✔ Gradient descent loop implemented; non-vectorized and vectorized modes
+     selectable via a flag in the same function.
+   ✔ Convergence plot on linear and log scales, with qualitative discussion.
+   ✔ Three learning-rate experiments: lr ∈ {0.01, 0.05, 0.1}, with summary
+     table and per-rate analysis of speed and stability.
+   ✔ Final fit plot and residuals plot; systematic U-shaped residual pattern
+     identified and discussed, with MSE, RMSE, and MAE reported.
+   ✔ Conceptual questions answered: astrophysical meaning of w (≈19.3 L☉/M☉),
+     and three categories of linear model limitations explained.
+   ✘ Minor deduction: None of the learning-rate experiments demonstrate a
+     diverging or unstable rate; including at least one diverging lr would make
+     the analysis more complete and pedagogically instructive.
+   Deduction: –0.10
+
+3. Notebook 2 – Polynomial Regression                      Score: 1.70 / 2.00
+   ─────────────────────────────────────────────────────────────────────────────
+   ✔ Dataset visualization: scatter plot of L vs M with temperature color-coded
+     (coolwarm colormap), plus a separate L vs T plot with mass-encoded size.
+   ✔ Feature engineering: build_features() constructs design matrix for M1
+     [M, T], M2 [M, T, M²], and M3 [M, T, M², M·T], with temperature
+     normalized by 1000.
+   ✔ Vectorized MSE and gradient computation using X.T @ error.
+   ✔ Gradient descent training of M3 with convergence plot (linear and log).
+   ✔ Feature selection experiment: M1, M2, M3 trained and compared with MSE
+     table and prediction-vs-actual scatter plots for each model.
+   ✔ Interaction cost analysis: w_MT swept over a range while other parameters
+     held fixed; minimum identified and plotted; physical interpretation given.
+   ✔ Inference demonstration: luminosity predicted for three new stars; results
+     cross-checked against physical approximation L ∝ M^3.5.
+   ✘ Bug: Cell 19 ends with `... / cost_without_interacti` — a truncated
+     variable name that causes a NameError at runtime. The cell would fail
+     during full execution. The plot and core analysis above this line are
+     correct, but the cell does not execute cleanly as submitted.
+   ✘ Minor bug: Cell 3 uses `"Número de muestras: {n_samples}\n"` without an
+     `f` prefix, so the variable is printed as a literal string instead of its
+     value. This does not crash the notebook but produces incorrect output.
+     Both bugs together reflect that the notebook was not validated with a
+     full top-to-bottom kernel restart before submission.
+   ✘ Minor: The convergence analysis for M3 does not compare convergence across
+     different learning rates (only one rate is used in Part 2). A brief
+     multi-rate comparison for the polynomial model would strengthen the
+     experiment.
+   Deduction: –0.30 (–0.20 for the two runtime/output bugs, –0.10 for missing
+   multi-rate comparison in Part 2)
+
+4. Cloud Execution Evidence (SageMaker)                    Score: 0.35 / 0.50
+   ─────────────────────────────────────────────────────────────────────────────
+   ✔ README describes the SageMaker execution procedure in clear steps (domain
+     access, Jupyter launch, kernel selection, etc.).
+   ✔ Six screenshot files are present in the Images/ folder (Screen.png,
+     Screen1.png – Screen5.png), indicating actual cloud execution.
+   ✔ Local vs SageMaker comparison section addresses similarities and
+     differences (pre-configured environment, scalability, dependency handling).
+   ✘ The README screenshot section ("Capturas de Pantalla") is empty—no image
+     references are embedded. The single image tag in the introduction points to
+     `Images/image.png` which does not exist, so no screenshot is actually
+     visible to a reader of the README.
+   ✘ It is not verifiable from the README alone which screenshots show notebooks
+     running in SageMaker vs. plots vs. successful execution, as they are not
+     labeled or described in context.
+   Deduction: –0.15
+
+────────────────────────────────────────────────────────────────────────────────
+FINAL GRADE
+────────────────────────────────────────────────────────────────────────────────
+  Repository structure & compliance:   0.45 / 0.50
+  Notebook 1 – Linear regression:      1.90 / 2.00
+  Notebook 2 – Polynomial regression:  1.70 / 2.00
+  Cloud execution evidence:            0.35 / 0.50
+  ─────────────────────────────────────────────────
+  Total:                               4.40 / 5.00
+
+Final grade: 4.4 / 5.0
+Result: PASS (≥ 3.0)
+
+────────────────────────────────────────────────────────────────────────────────
+STRENGTHS
+────────────────────────────────────────────────────────────────────────────────
+• Both notebooks are well-organized with numbered sections matching the
+  assignment requirements precisely.
+• Gradient derivations are shown explicitly in LaTeX in markdown cells, and the
+  mathematical formulas are correctly implemented in code.
+• Both non-vectorized (loop) and vectorized gradient implementations are provided
+  and their numerical equivalence is verified—this demonstrates solid
+  understanding of the difference between the two approaches.
+• The cost surface (3D + contour) is complete and correctly interpreted
+  (convexity, elliptic iso-cost curves, gradient direction).
+• The convergence analysis in Part 1 uses both linear and logarithmic scales,
+  which is good practice and aids interpretation.
+• Three learning rates are tested in Part 1 with a comparison table and
+  per-rate qualitative analysis.
+• The feature engineering in Part 2 is clean and generalizable; the three model
+  variants (M1, M2, M3) are compared in a structured experiment.
+• The interaction-coefficient sweep in Part 2 correctly identifies the trained
+  value as the cost minimum and discusses the physical meaning of the M·T term.
+• Inference examples in Part 2 include cross-validation against the L ∝ M^3.5
+  physical approximation, showing thoughtful interpretation.
+• Conceptual questions in Part 1 are answered with genuine astrophysical
+  reasoning (nuclear fusion, power-law mass-luminosity relation, U-shaped
+  residuals as evidence of non-linearity).
+• Six actual screenshots are stored in the Images/ folder, demonstrating that
+  the notebooks were run in a cloud environment.
+• README is comprehensive, covers all required sections, and includes the
+  dataset values explicitly.
+
+────────────────────────────────────────────────────────────────────────────────
+ISSUES & MISSING ELEMENTS
+────────────────────────────────────────────────────────────────────────────────
+• Part 2 – Bug: `cost_without_interacti` (Cell 19, last line) is a truncated
+  variable name causing a NameError. The cell cannot execute completely as
+  submitted. Fix: rename to `cost_without_interaction`.
+• README – broken image link: `Images/image.png` is referenced but the file
+  does not exist. The Screenshots section is otherwise empty.
+• README – screenshots not labeled: the six images in Images/ are not embedded
+  in the README with captions explaining what each one shows (notebook view,
+  successful run, output plot).
+• Part 1 – no diverging learning-rate case: the assignment benefits from showing
+  a learning rate that causes divergence or oscillation to illustrate why rate
+  selection matters.
+• Part 2 – only one learning rate tested: unlike Part 1, the polynomial model
+  is trained at a single rate (0.1). A brief multi-rate comparison would
+  complete the analysis.
+• Part 2 – missing f-string prefix in Cell 3: `"Número de muestras: {n_samples}\n"`
+  should be `f"Número de muestras: {n_samples}\n"`. This is a minor bug that
+  would print the literal string instead of the value.
+
+────────────────────────────────────────────────────────────────────────────────
+TA FEEDBACK TO STUDENT
+────────────────────────────────────────────────────────────────────────────────
+This is a very strong submission. You clearly understand both the mathematical
+foundations and the astrophysical context of the problem. Your derivations are
+correct, your code is clean and well-documented, and your analyses are thorough
+and well-structured.
+
+To bring this work to its full potential, focus on two things:
+
+1. Before submitting, always run all cells top-to-bottom in a fresh kernel to
+   catch runtime errors. The truncated variable name in Part 2 (`cost_without_interacti`)
+   and the missing `f` prefix in Part 2 Cell 3 are the kind of bugs that a
+   full end-to-end execution would catch immediately.
+
+2. Update your README to properly embed the SageMaker screenshots with
+   descriptive captions, and fix the broken image link. Evidence of cloud
+   execution is a graded component; the screenshots exist but are not visible
+   to the reader of the README.
+
+Optional improvements: add a diverging-rate experiment in Part 1 (e.g., lr=0.5
+or lr=1.0) to show what happens when the rate is too large; and include a brief
+learning-rate sweep in Part 2 to mirror the analysis in Part 1. These additions
+would make your comparative analysis more pedagogically complete.
+
+Overall, excellent work. The conceptual commentary throughout both notebooks
+shows that you genuinely understand what the algorithms are doing and why.
+
+────────────────────────────────────────────────────────────────────────────────
+AI-GENERATION ASSESSMENT (NON-GRADING — INFORMATIVE ONLY)
+────────────────────────────────────────────────────────────────────────────────
+This assessment is observational and does not imply misconduct.
+
+A. Qualitative Assessment
+───────────────────────────
+Indicators suggesting AI assistance:
+  • Explanations in markdown cells are uniformly polished and follow a
+    consistent pedagogical structure (numbered observations, bold key terms,
+    LaTeX-formatted equations) with very few grammatical or reasoning errors.
+  • Section headers, docstring format, and commentary style are highly uniform
+    across both notebooks, suggesting a single authoring session with
+    consistent prompting.
+  • The conceptual answers (meaning of w, limits of linearity, interaction
+    term interpretation) are accurate and complete but somewhat generic in
+    phrasing—they read more like textbook explanations than personal reasoning.
+  • The three-model comparison (M1/M2/M3) and the interaction-coefficient
+    sweep are structured in a way that closely mirrors typical ML-course
+    assignment templates.
+
+Indicators suggesting human involvement:
+  • The submission contains two distinct runtime bugs (truncated variable name,
+    missing f-string prefix) that are inconsistent with fully AI-generated,
+    tested code.
+  • Temperature normalization by dividing by 1000 (T/1000) is a pragmatic
+    engineering choice not always present in generic templates; it suggests
+    active decision-making about feature scaling.
+  • The astrophysical context (Escuela Colombiana de Ingenieria, bootcamp
+    framing) is personalized and consistent throughout the README.
+  • Some variable naming choices (e.g., `compute_grads` as a function alias,
+    `results` list of dicts) reflect personal coding style.
+
+B. Quantitative Estimate
+───────────────────────────
+  Code:                ~60% AI-assisted
+  Explanations/markdown: ~70% AI-assisted
+  README:              ~65% AI-assisted
+
+C. Commentary
+───────────────
+The code structure, docstring style, and markdown explanations show strong
+signs of AI assistance in generating boilerplate, explanations, and commentary.
+However, the presence of runtime bugs, personalized design choices (temperature
+normalization, custom result aggregation), and the coherent astrophysical framing
+suggest that a human author actively directed, reviewed, and integrated the
+AI-generated content rather than submitting it verbatim. The work appears to be
+a collaborative product of AI tooling and genuine student engagement.
+
+This assessment is observational and does not imply misconduct.
+
+================================================================================
+END OF EVALUATION
+================================================================================
